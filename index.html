@@ -226,12 +226,7 @@
       transform: scale(1.1);
     }
 
-    .message-container {
-      position: relative;
-      display: inline-block;
-    }
-
-    .message-btn {
+    .contact a {
       display: inline-block;
       margin: 6px;
       padding: 8px 14px;
@@ -241,56 +236,38 @@
       text-decoration: none;
       transition: all 0.3s ease;
       font-weight: 600;
-      cursor: pointer;
+      position: relative;
+      overflow: hidden;
     }
 
-    .message-options {
-      visibility: hidden;
-      opacity: 0;
+    .contact a::before {
+      content: '';
       position: absolute;
-      top: 100%;
-      left: 50%;
-      transform: translateX(-50%) translateY(8px);
-      background: rgba(0,0,0,0.95);
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid var(--accent);
-      border-radius: 8px;
-      padding: 8px;
-      min-width: 140px;
-      transition: all 0.3s ease;
-      z-index: 1000;
-      box-shadow: 
-        0 10px 30px rgba(0,0,0,0.5),
-        0 0 20px rgba(57,255,20,0.2);
+      top: 0;
+      left: -100%;
+      width: 100%;
+      height: 100%;
+      background: linear-gradient(90deg, transparent, rgba(57,255,20,0.2), transparent);
+      transition: 0.5s;
     }
 
-    .message-container:hover .message-options {
-      visibility: visible;
-      opacity: 1;
-      transform: translateX(-50%) translateY(0);
+    .contact a:hover::before {
+      left: 100%;
     }
 
-    .message-options a {
-      display: block;
-      margin: 4px 0;
-      padding: 8px 16px;
-      border-radius: 6px;
-      text-align: center;
-      transition: all 0.2s ease;
-      background: transparent;
-    }
-
-    .message-options a:hover {
-      background: linear-gradient(90deg, var(--accent), var(--accent2));
-      color: #0f172a;
-      transform: scale(1.05);
-    }
-
-    .message-btn:hover {
+    .contact a:hover {
       background: linear-gradient(90deg, var(--accent), var(--accent2));
       color: #0f172a;
       transform: scale(1.1);
+      box-shadow: 0 0 20px rgba(57,255,20,0.3);
+    }
+
+    .whatsapp:hover {
+      background: linear-gradient(90deg, #25D366, #128C7E) !important;
+    }
+
+    .telegram:hover {
+      background: linear-gradient(90deg, #0088cc, #0077B5) !important;
     }
 
     .dropdown:hover .dropdown-content {
@@ -476,13 +453,8 @@ Recently, I was crowned Champion of the DIU Intra First Practice CTF, a mileston
           <p style="color:var(--muted)">Open to collaborations, cybersecurity internships, and design projects. Let's connect!</p>
           <div class="contact">
             <a href="https://mail.google.com/mail/?view=cm&fs=1&to=itsmemehrab369@gmail.com&su=Portfolio%20Contact" target="_blank">Email</a>
-            <div class="message-container">
-              <a href="#" class="message-btn">Message ▼</a>
-              <div class="message-options">
-                <a href="https://wa.me/+8801629263618" target="_blank">WhatsApp</a>
-                <a href="https://t.me/+8801629263618" target="_blank">Telegram</a>
-              </div>
-            </div>
+            <a href="https://wa.me/+8801629263618" target="_blank" class="whatsapp">WhatsApp</a>
+            <a href="https://t.me/+8801629263618" target="_blank" class="telegram">Telegram</a>
           </div>
         </div>
       </aside>
