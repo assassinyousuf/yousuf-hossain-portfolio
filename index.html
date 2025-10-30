@@ -45,6 +45,20 @@
         radial-gradient(circle at 85% 75%, rgba(0,255,255,0.08), transparent 50%),
         radial-gradient(circle at 50% 50%, rgba(139,92,246,0.05), transparent 60%);
       animation: pulseGlow 8s ease-in-out infinite;
+      z-index: -2;
+    }
+
+    body::after {
+      content: "";
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: 
+        repeating-linear-gradient(90deg, rgba(57,255,20,0.03) 0 1px, transparent 1px 40px),
+        repeating-linear-gradient(180deg, rgba(0,255,255,0.03) 0 1px, transparent 1px 40px);
+      pointer-events: none;
       z-index: -1;
     }
 
@@ -95,6 +109,16 @@
       -webkit-text-fill-color: transparent;
       line-height: 1.4;
       text-shadow: 0 0 20px rgba(57,255,20,0.5);
+      position: relative;
+      animation: glitch 3s infinite linear alternate;
+    }
+
+    @keyframes glitch {
+      0%, 100% { text-shadow: 2px 0 var(--accent2), -2px 0 var(--accent); }
+      20% { text-shadow: 2px 2px var(--accent), -2px -2px var(--accent2); }
+      40% { text-shadow: -2px 2px var(--accent2), 2px -2px var(--accent); }
+      60% { text-shadow: 0 0 var(--accent), 0 0 var(--accent2); }
+      80% { text-shadow: 1px 0 var(--accent2), -1px 0 var(--accent); }
     }
 
     p.lead {
@@ -322,6 +346,66 @@
       50% { transform: scale(1.1); opacity: 0.8; }
     }
 
+    @keyframes float {
+      0%, 100% { transform: translateY(0); }
+      50% { transform: translateY(-8px); }
+    }
+
+    .hobby-icons {
+      display: flex;
+      gap: 15px;
+      margin-top: 12px;
+      flex-wrap: wrap;
+    }
+
+    .hobby-icon {
+      font-size: 28px;
+      animation: float 2.5s ease-in-out infinite;
+      filter: drop-shadow(0 0 6px var(--accent));
+      cursor: pointer;
+      transition: transform 0.3s ease;
+    }
+
+    .hobby-icon:hover {
+      transform: scale(1.3) rotate(15deg);
+      filter: drop-shadow(0 0 12px var(--accent2));
+    }
+
+    .hobby-icon:nth-child(2) {
+      animation-delay: 0.5s;
+    }
+
+    .hobby-icon:nth-child(3) {
+      animation-delay: 1s;
+    }
+
+    .hobby-icon:nth-child(4) {
+      animation-delay: 1.5s;
+    }
+
+    .project {
+      padding: 14px;
+      border-radius: 12px;
+      border: 1px solid rgba(255,255,255,0.05);
+      margin-bottom: 12px;
+      background: rgba(255,255,255,0.02);
+      transition: all 0.4s ease;
+      position: relative;
+      overflow: visible;
+    }
+
+    .project::before {
+      content: attr(data-icon);
+      position: absolute;
+      top: 10px;
+      right: 15px;
+      font-size: 32px;
+      animation: float 3s ease-in-out infinite;
+      filter: drop-shadow(0 0 8px var(--accent2));
+      pointer-events: none;
+      opacity: 0.9;
+    }
+
     @media (max-width: 900px) {
       .grid { grid-template-columns: 1fr; }
     }
@@ -349,11 +433,19 @@
       <main>
         <div class="card">
           <div class="section-title">About Me</div>
-          <p style="color:var(--muted)">I’m a curious mind who loves solving puzzles — whether it’s breaking down complex cybersecurity challenges or crafting eye-catching visual designs. As a cybersecurity enthusiast, I thrive on Capture The Flag (CTF) competitions and hands-on learning through platforms like TryHackMe and HackTheBox.
+          <p style="color:var(--muted)">I'm a curious mind who loves solving puzzles — whether it's breaking down complex cybersecurity challenges or crafting eye-catching visual designs. As a cybersecurity enthusiast, I thrive on Capture The Flag (CTF) competitions and hands-on learning through platforms like TryHackMe and HackTheBox.
 
-Beyond code and exploits, I’m also a passionate graphics designer who enjoys creating impactful visuals that tell stories and inspire engagement. My goal is to bridge creativity with technology — building secure, functional, and visually stunning digital experiences.
+Beyond code and exploits, I'm also a passionate graphics designer who enjoys creating impactful visuals that tell stories and inspire engagement. My goal is to bridge creativity with technology — building secure, functional, and visually stunning digital experiences.
 
 Recently, I was crowned Champion of the DIU Intra First Practice CTF, a milestone that fueled my motivation to push further into ethical hacking and digital security innovation.</p>
+          <div class="hobby-icons">
+            <span class="hobby-icon" title="Gaming">🎮</span>
+            <span class="hobby-icon" title="Design">🎨</span>
+            <span class="hobby-icon" title="Music">🎧</span>
+            <span class="hobby-icon" title="Coding">💻</span>
+            <span class="hobby-icon" title="Hacking">🔐</span>
+            <span class="hobby-icon" title="Coffee">☕</span>
+          </div>
         </div>
 
         <div class="card">
@@ -374,19 +466,19 @@ Recently, I was crowned Champion of the DIU Intra First Practice CTF, a mileston
 
         <div class="card">
           <div class="section-title">Projects</div>
-          <div class="project">
+          <div class="project" data-icon="🏨">
             <h4>Hostel Management System</h4>
             <p style="color:var(--muted);font-size:14px">C-based group project — managed data operations and implemented hostel features.</p>
           </div>
-          <div class="project">
+          <div class="project" data-icon="🧩">
             <h4>SudokuSolver</h4>
             <p style="color:var(--muted);font-size:14px">Java OOP program visualizing the solving process using backtracking algorithm.</p>
           </div>
-          <div class="project">
+          <div class="project" data-icon="🗼">
             <h4>Tower Of Hanoi</h4>
             <p style="color:var(--muted);font-size:14px">Flutter app that visualizes recursion logic behind Tower of Hanoi puzzles.</p>
           </div>
-          <div class="project">
+          <div class="project" data-icon="🎨">
             <h4>Event Branding for DIU CPC</h4>
             <p style="color:var(--muted);font-size:14px">Designed all digital branding materials for DIU CSE Fest 2024 including posters, social media ads, and digital banners.</p>
           </div>
@@ -477,6 +569,64 @@ Recently, I was crowned Champion of the DIU Intra First Practice CTF, a mileston
     }, { threshold: 0.2 });
 
     document.querySelectorAll('.card').forEach(el => observer.observe(el));
+
+    // Create floating particles
+    function createParticles() {
+      const particlesContainer = document.createElement('div');
+      particlesContainer.style.cssText = `
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        height: 100%;
+        pointer-events: none;
+        z-index: -1;
+        overflow: hidden;
+      `;
+      document.body.appendChild(particlesContainer);
+
+      for (let i = 0; i < 30; i++) {
+        const particle = document.createElement('div');
+        const size = Math.random() * 4 + 2;
+        const color = Math.random() > 0.5 ? '#39ff14' : '#0ff';
+        const startX = Math.random() * 100;
+        const duration = Math.random() * 20 + 15;
+        const delay = Math.random() * 10;
+
+        particle.style.cssText = `
+          position: absolute;
+          width: ${size}px;
+          height: ${size}px;
+          background: ${color};
+          border-radius: 50%;
+          left: ${startX}%;
+          bottom: -20px;
+          opacity: 0.6;
+          box-shadow: 0 0 ${size * 2}px ${color};
+          animation: floatUp ${duration}s ${delay}s linear infinite;
+        `;
+        particlesContainer.appendChild(particle);
+      }
+    }
+
+    // Add CSS animation for particles
+    const style = document.createElement('style');
+    style.textContent = `
+      @keyframes floatUp {
+        0% { 
+          transform: translateY(0) translateX(0) scale(0);
+          opacity: 0;
+        }
+        10% { opacity: 0.6; }
+        90% { opacity: 0.6; }
+        100% {
+          transform: translateY(-100vh) translateX(${Math.random() * 100 - 50}px) scale(1);
+          opacity: 0;
+        }
+      }
+    `;
+    document.head.appendChild(style);
+    createParticles();
   </script>
 </body>
 </html>
